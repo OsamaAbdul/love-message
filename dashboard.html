@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="arabic"> <!-- Set the default language to Portuguese (pt) -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة معلومات الاستثمار 
+    </title> <!-- Change the title to Portuguese -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            bottom: 10px; /* Adjust the distance from the bottom as needed */
+            right: 10px; /* Adjust the distance from the right as needed */
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            display: flex; /* Use flexbox to arrange items horizontally */
+            opacity: 0; /* Initially, set opacity to 0 for fade-in effect */
+            transition: opacity 0.5s; /* Add a transition for smooth fade-in and fade-out */
+        }
+
+        .popup-logo {
+            max-width: 70px; /* Adjust the image size as needed */
+            margin-right: 20px; /* Add space between the logo and text content */
+        }
+
+        .show {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        .container h1 {
+            color: #333;
+            font-size: 24px;
+            text-transform: uppercase;
+            margin: 0 0 20px;
+        }
+
+        .uploaded-image-container {
+            text-align: center;
+        }
+
+        #uploaded-image {
+            max-width: 100px;
+            border-radius: 50%;
+            display: block;
+            margin: 40px auto;
+        }
+
+        .info-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .upload-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .dashboard-nav {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+        }
+
+        .dashboard-nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .dashboard-nav li {
+            margin-bottom: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #888;
+            border-radius: 8px;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .modal-header {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .modal-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .withdraw-button {
+            background-color: #ff5722;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    
+        
+        <div id="withdrawal-modal" class="modal">
+            <div class="modal-content">
+                <span class="modal-header">تأكيد السحب </span> <!-- Translate your modal content to Portuguese -->
+                <p>لديك رسوم معلقة قدرها 20,000 جنيه مصري لدفعها لتفعيل السحب. شكرا </p>
+                <button id="confirm-withdrawal" class="modal-button"><a href="https://t.me/Muslimat_011">تأكيد الدفع </a> </button> <!-- Translate your button to Portuguese -->
+            </div>
+        </div>
+        
+        <div class="uploaded-image-container">
+            <!-- Static image URL -->
+            <img id="uploaded-image" src="img.jpg" alt="Sua Foto de Perfil" width ="100px" height="100px"> <!-- Translate your alt text to Portuguese -->
+        </div>
+
+        <ul class="info-list">
+            <li><strong>اسم:</strong>SAMEH RAMADAN </li>
+            <li><strong>اللقب:</strong> MAHMOUD IBRAHIM </li>
+            <li><strong>رقم البنك : </strong>1008445560010201</li>
+           
+        </ul>
+
+        <h1>استثماري </h1> <!-- Translate your section header to Portuguese -->
+        <ul class="info-list">
+            
+            <li><strong>ربح:</strong> $50,000</li>
+            <li><strong>الرسوم المعلقة</strong>:20,000 EGP</li>
+        </ul>
+    </div>
+    
+    <center><button id="withdraw-button" class="withdraw-button">ويذروال </button></center> <!-- Translate your button to Portuguese -->
+    <br>
+    <br>
+    <br>
+    <br>
+     <div class="popup" id="popup">
+        <img src="pop.png" class="pop.png" alt="Logo" width="100px" height="100px">
+        <p id="popupText">This is your random pop-up alert!</p>
+    </div>
+
+    <script>
+        // JavaScript code remains the same
+         // Get references to the button and the modal
+        const withdrawButton = document.getElementById('withdraw-button');
+        const withdrawalModal = document.getElementById('withdrawal-modal');
+        const confirmButton = document.getElementById('confirm-withdrawal');
+
+        // When the "Withdraw" button is clicked, show the modal
+        withdrawButton.addEventListener('click', function() {
+            withdrawalModal.style.display = 'block';
+        });
+
+        // When the "Confirm" button in the modal is clicked, close the modal
+        confirmButton.addEventListener('click', function() {
+            withdrawalModal.style.display = 'none';
+        });
+
+        // Close the modal if the user clicks outside of it
+        window.addEventListener('click', function(event) {
+            if (event.target === withdrawalModal) {
+                withdrawalModal.style.display = 'none';
+            }
+        });
+
+         const popup = document.getElementById('popup');
+        const popupText = document.getElementById('popupText');
+        
+        function showPopup() {
+            // Array of different contents
+            const contents = [
+            "José Silva from Brazil just withdraw $1000",
+            "Maria Santos just withdraw $2500 25 Mins ago",
+            "António Rodrigues just withdraw R459",
+            "Isabel Ferreira from Angola just withdraw Kz4000",
+            "Carlos Oliveira just withdraw $567",
+            "Sofia Pereira just withdraw $658",
+            "Miguel Costa just withdraw $985",
+            "Ana Gonçalves just withdraw $150",
+            "Luís Fernandes just withdraw $536",
+            "Catarina Martins just withdraw $250",
+                
+            ];
+
+            // Randomly select a content
+            const randomIndex = Math.floor(Math.random() * contents.length);
+            popupText.textContent = contents[randomIndex];
+            
+            // Show the pop-up with fade-in effect
+            popup.classList.add('show');
+            
+            // Set a timeout to hide the pop-up after 2 seconds
+            setTimeout(hidePopup, 3050);
+        }
+
+        function hidePopup() {
+            // Hide the pop-up with fade-out effect
+            popup.classList.remove('show');
+        }
+
+        // Initially, show the pop-up
+        showPopup();
+
+        // Set an interval to continuously show and hide the pop-up every 4 seconds
+        setInterval(function () {
+            showPopup();
+        }, 4050); // 4 seconds (2 seconds for show and 2 seconds for hide)
+    </script>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.traslate.TranslateElement({ pageLanguage: 'arabic', layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
